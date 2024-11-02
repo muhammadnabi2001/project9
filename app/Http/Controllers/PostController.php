@@ -90,5 +90,13 @@ class PostController extends Controller
 
         return redirect()->back()->with('error', 'Category not found.');
     }
+    public function batafsil(int $id)
+    {
+        //dd($id);
+        $post=Post::findOrFail($id);
+        $categories=Category::all();
+        //dd($post);
+        return view('batafsil',['post'=>$post,'categories'=>$categories]);
+    }
     
 }

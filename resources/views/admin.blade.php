@@ -108,77 +108,62 @@
 
             <div class="row">
                 <div class="col-12">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Text</th>
-                                <th>Img</th>
-                                <th>Category</th>
-                                <th>Update</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody id="userTableBody">
-                            @foreach($posts as $post)
-                            <th>{{$post->id}}</th>
-                            <th>{{$post->title}}</th>
-                            <th>{{$post->description}}</th>
-                            <th>{{$post->text}}</th>
-                            <th><img src="{{ asset('img_uploaded/' . $post->img) }}" width="100px"></th>
-                            <th>{{$post->category->name}}</th>
-                            <th>
-                                <div class="row mb-2">
-                                    <div class="col-sm-6">
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal{{$post->id}}">
+                    <div class="table-responsive"> <!-- table-responsive qo'shildi -->
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Text</th>
+                                    <th>Img</th>
+                                    <th>Category</th>
+                                    <th>Update</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody id="userTableBody">
+                                @foreach($posts as $post)
+                                <tr>
+                                    <td>{{ $post->id }}</td>
+                                    <td>{{ $post->title }}</td>
+                                    <td>{{ $post->description }}</td>
+                                    <td style="white-space: normal; word-break: break-word;">{{ $post->text }}</td> <!-- Matnni kenglikdan oshsa cho‘zilishi uchun style qo‘shildi -->
+                                    <td><img src="{{ asset('img_uploaded/' . $post->img) }}" width="100px"></td>
+                                    <td>{{ $post->category->name }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $post->id }}">
                                             Update
                                         </button>
-
                                         <!-- Modal -->
-                                        <div class="modal fade" id="exampleModal{{$post->id}}" tabindex="-1"
-                                            aria-labelledby="exampleModalLabel{{$post->id}}" aria-hidden="true">
+                                        <div class="modal fade" id="exampleModal{{ $post->id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $post->id }}" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h1 class="modal-title fs-5"
-                                                            id="exampleModalLabel{{$post->id}}">Modal
-                                                            title</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel{{ $post->id }}">Edit Post</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="{{ route('updatepost', $post->id) }}"
-                                                            method="POST" enctype="multipart/form-data">
+                                                        <form action="{{ route('updatepost', $post->id) }}" method="POST" enctype="multipart/form-data">
                                                             @csrf
                                                             <div class="mb-3">
-                                                                <label class="form-label">Post title</label>
-                                                                <input type="text" class="form-control"
-                                                                    placeholder="input category name" name="title"
-                                                                    value="{{$post->title}}">
+                                                                <label class="form-label">Post Title</label>
+                                                                <input type="text" class="form-control" name="title" value="{{ $post->title }}">
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label class="form-label">Post description</label>
-                                                                <input type="text" class="form-control"
-                                                                    name="description" value="{{$post->description}}">
+                                                                <label class="form-label">Post Description</label>
+                                                                <input type="text" class="form-control" name="description" value="{{ $post->description }}">
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label class="form-label">Post text</label>
-                                                                <input type="text" class="form-control" name="text"
-                                                                    value="{{$post->text}}">
+                                                                <label class="form-label">Post Text</label>
+                                                                <input type="text" class="form-control" name="text" value="{{ $post->text }}">
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label class="form-label">Post Image</label>
-                                                                <input type="file" class="form-control" name="img"
-                                                                    >
+                                                                <input type="file" class="form-control" name="img">
                                                             </div>
                                                             <div class="mb-3">
-                                                                <div>
-                                                                    <img src="{{ asset('img_uploaded/' . $post->img) }}" width="100px" alt="Current Image">
-                                                                </div>
+                                                                <img src="{{ asset('img_uploaded/' . $post->img) }}" width="100px" alt="Current Image">
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label class="form-label">Category</label>
@@ -191,28 +176,24 @@
                                                                     @endforeach
                                                                 </select>
                                                             </div>
-
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary"
-                                                            name="ok">Update</button>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Update</button>
                                                         </form>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                </td>
-                            </th>
-                            <th><a href="deletepost/{{$post->id}}" class="btn btn-danger">Delete</a></th>
-                            
-                            @endforeach
-                        </tbody>
-                    </table>
+                                    </td>
+                                    <td><a href="deletepost/{{ $post->id }}" class="btn btn-danger">Delete</a></td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+                
             </div>
         </div>
     </section>

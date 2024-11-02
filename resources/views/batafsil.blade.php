@@ -16,40 +16,28 @@
 
     <!-- Blog Posts Section -->
     <section id="blog-posts" class="blog-posts section">
-
-      <div class="container">
-        <div class="row gy-4">
-
-          @foreach($posts as $post)
-          <div class="col-lg-4">
-              
-            <article>
-              
-              <div class="post-img">
-                <img src="{{ asset('img_uploaded/' . $post->img) }}" alt="" class="img-fluid">
-              </div>
-              
-              <p class="post-category">{{$post->title}}</p>
-              
-              <h2 class="title">
-                <a href="batafsil/{{$post->id}}">{{$post->description}}</a>
-              </h2>
-              
-              <div class="d-flex align-items-center">
-                <div class="post-meta">
-                  <p class="post-author">somthe</p>
-                  <p class="post-date">
-                    <time datetime="2022-01-01">{{$post->created_at}}</time>
-                  </p>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <article>
+                        <div class="post-img">
+                            <img src="{{ asset('img_uploaded/' . $post->img) }}" alt="{{ $post->title }}" class="img-fluid" style="width: 100%; height: auto;">
+                        </div>
+                        
+                        <h2 class="title">{{ $post->title }}</h2>
+                        <p class="post-description">{{ $post->description }}</p>
+                        <div class="post-text">
+                            <p>{{ $post->text }}</p>
+                        </div>
+                        <p class="post-date">
+                            <time datetime="{{ $post->created_at }}">{{ $post->created_at->format('F j, Y') }}</time>
+                        </p>
+                    </article>
                 </div>
-              </div>
-            </article>
-          </div><!-- End post list item -->
-              @endforeach   
+            </div>
         </div>
-      </div>
-
     </section><!-- /Blog Posts Section -->
+    
 
     <!-- Blog Pagination Section -->
     <section id="blog-pagination" class="blog-pagination section">

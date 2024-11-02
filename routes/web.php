@@ -25,3 +25,4 @@ Route::get('/admin',[PostController::class,'admin'])->middleware('auth');
 Route::post('/createpost',[PostController::class,'create']);
 Route::post('updatepost{id}',[PostController::class,'update'])->name('updatepost');
 Route::get('/deletepost/{id}',[PostController::class,'delete']);
+Route::get('/batafsil/{id}',[PostController::class,'batafsil']);

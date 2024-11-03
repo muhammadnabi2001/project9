@@ -13,7 +13,7 @@ class CategoryController extends Controller
     {
         $categories=Category::orderBy('tr','asc')->get();
         //dd($categories);
-        $posts=Post::all();
+        $posts=Post::orderBy('id','desc')->paginate(3);
         return view('index',['categories'=>$categories,'posts'=>$posts]);
     }
     public function category()

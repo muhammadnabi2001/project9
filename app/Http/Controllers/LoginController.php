@@ -47,9 +47,17 @@ class LoginController extends Controller
         ]);
         if(Auth::attempt(['email'=>$request->email,'password'=>$request->password]))
         {
-            $categories=Category::all();
-            $posts=Post::all();
-            return view('/admin',['categories'=>$categories,'posts'=>$posts]);
+            if(Auth::user()->email==='admin@gmail.com')
+            {
+
+                $categories=Category::all();
+                $posts=Post::all();
+                return view('/admin',['categories'=>$categories,'posts'=>$posts]);
+            }
+            else
+            {
+                return redirect('/')->with('success', 'Ro\'yxatdan o\'tish muvaffaqiyatli yakunlandi!');
+            }
         }
         else
         {

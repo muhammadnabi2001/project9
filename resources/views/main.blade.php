@@ -45,13 +45,15 @@
       <a href="index.html" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1 class="sitename">Selecao</h1>
+        <a href="/">
+          <h1 class="sitename">Home</h1>
+        </a>
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
             @foreach($categories as $category)
-            <li><a href="#hero">{{$category->name}}</a></li>   
+            <li><a href="{{ route('post.show', $category->id) }}">{{ $category->name }}</a></li>   
             @endforeach
             <li><a href="/login">Login</a></li>
             <li><a href="/register">Register</a></li>

@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use App\Models\Category; 
-use Illuminate\Support\Facades\View; 
+use App\Models\Category;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,7 +23,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer('layouts.main', function ($view) {
-            $view->with('categories', Category::orderBy('tr','asc')->get());
+            $view->with('categories', Category::orderBy('tr', 'asc')->get());
         });
+        Paginator::useBootstrapFive();
+        Paginator::useBootstrapFour();
     }
 }

@@ -1,65 +1,164 @@
-@extends('main')
-@section('title')
-@section('content')
-<main class="main">
+<!DOCTYPE html>
+<html lang="en">
 
-    <!-- Page Title -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Blog Details - Selecao Bootstrap Template</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="{{asset('assets/img/favicon.png')}}" rel="icon">
+  <link href="{{asset('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/vendor/aos/aos.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/vendor/animate.css/animate.min.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+
+  <link href="{{asset('assets/css/main.css')}}" rel="stylesheet">
+
+ 
+</head>
+
+<body class="blog-details-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        
+        <h1 class="sitename">Selecao</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+            @foreach($categories as $category)
+            <li><a href="{{ route('post.show', $category->id) }}">{{ $category->name }}</a></li>   
+            @endforeach
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="main">
+
     <div class="page-title dark-background">
       <div class="container position-relative">
-        <h1>Eng so'nggi yangiliklar</h1>
-        <p>Welcome to our Website</p>
+        <h1>Blog Details</h1>
+        <p>Esse dolorum voluptatum ullam est sint nemo et est ipsa porro placeat quibusdam quia assumenda numquam molestias.</p>
         <nav class="breadcrumbs">
-          
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li class="current">Blog Details</li>
+          </ol>
         </nav>
       </div>
-    </div><!-- End Page Title -->
+    </div>
 
-    <!-- Blog Posts Section -->
-    <section id="blog-posts" class="blog-posts section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <article>
-                        <div class="post-img">
-                            <img src="{{ asset('img_uploaded/' . $post->img) }}" alt="{{ $post->title }}" class="img-fluid" style="width: 100%; height: auto;">
-                        </div>
-                        
-                        <h2 class="title">{{ $post->title }}</h2>
-                        <p class="post-description">{{ $post->description }}</p>
-                        <div class="post-text">
-                            <p>{{ $post->text }}</p>
-                        </div>
-                        <p class="post-date">
-                            <time datetime="{{ $post->created_at }}">{{ $post->created_at->format('F j, Y') }}</time>
-                        </p>
-                    </article>
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-8">
+          <section id="blog-details" class="blog-details section">
+            <div class="container">
+              <article class="article">
+                <div class="post-img">
+                  <img src="{{ asset('img_uploaded/' . $post->img) }}" alt="" class="img-fluid">
                 </div>
+                <h2 class="title">{{$post->title}}</h2>
+                
+
+                <div class="content">
+                  <p>
+                   {{$post->description}}
+                  </p>
+
+                  <p>
+                    {{$post->text}}
+                  </p>
+                </div><!-- End post content -->
+                <div class="meta-top">
+                    <ul>
+                      <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2020-01-01">{{$post->created_at}}</time></a></li>
+                      <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">{{$post->comments->count()}} comments</a></li>
+                      <li class="d-flex align-items-center">
+                        <a href="{{ route('post.like', $post->id) }}" class="">
+                            <i class="bi bi-hand-thumbs-up {{ $post->likeOrDislike && $post->likeOrDislike ? 'text-danger' : '' }}">
+                                {{ $post->likeCount ? $post->likeCount->count() : 0 }}
+                            </i>  
+                        </a>
+                    </li>
+                    
+                    </li>
+                    
+                    </ul>
+                  </div><!-- End meta top -->
+
+              </article>
+
             </div>
-        </div>
-    </section><!-- /Blog Posts Section -->
-    
+          </section><!-- /Blog Details Section -->
+          <section id="blog-comments" class="blog-comments section">
+          </section><!-- /Blog Comments Section -->
+          <section id="comment-form" class="comment-form section">
+            <div class="container">
+              <form action="{{route('post.comments',$post->id)}}">
+                @csrf
+                <h4>Post Comment</h4>
+                <div class="row">
+                  <div class="col form-group">
+                    <textarea class="form-control" placeholder="Your Comment*" name="body"></textarea>
+                  </div>
+                </div>
 
-    <!-- Blog Pagination Section -->
-    <section id="blog-pagination" class="blog-pagination section">
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Post Comment</button>
+                </div>
 
-      <div class="container">
-        <div class="d-flex justify-content-center">
-          <ul>
-            <li><a href="#"><i class="bi bi-chevron-left"></i></a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#" class="active">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li>...</li>
-            <li><a href="#">10</a></li>
-            <li><a href="#"><i class="bi bi-chevron-right"></i></a></li>
-          </ul>
+              </form>
+
+            </div>
+          </section><!-- /Comment Form Section -->
         </div>
+        <div class="col-lg-4 sidebar">
+          <div class="widgets-container">
+
+              <h3 class="widget-title">Comments</h3>
+              <ul class="mt-3">
+                <ul>
+                  @foreach($post->comments as $comment)
+                      <li>
+                        <strong>{{ $comment->user->name }} <br></strong>
+                          <a href="#">{{ $comment->body }}</a>
+                      </li>
+                  @endforeach
+              </ul>
+              
+              </ul>
+
+            </div><!--/Categories Widget -->
+          </div>
+        </div>
+
       </div>
-
-    </section><!-- /Blog Pagination Section -->
+    </div>
 
   </main>
+
   <footer id="footer" class="footer dark-background">
     <div class="container">
       <h3 class="sitename">Selecao</h3>
@@ -76,13 +175,29 @@
           <span>Copyright</span> <strong class="px-1 sitename">Selecao</strong> <span>All Rights Reserved</span>
         </div>
         <div class="credits">
-          <!-- All the links in the footer should remain intact. -->
-          <!-- You can delete the links only if you've purchased the pro version. -->
-          <!-- Licensing information: https://bootstrapmade.com/license/ -->
-          <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+         
           Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
         </div>
       </div>
     </div>
   </footer>
-@endsection
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{asset('assets/vendor/php-email-form/validate.js')}}"></script>
+  <script src="{{asset('assets/vendor/aos/aos.js')}}"></script>
+  <script src="{{asset('assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
+  <script src="{{asset('assets/vendor/imagesloaded/imagesloaded.pkgd.min.js')}}"></script>
+  <script src="{{asset('assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
+  <script src="{{asset('assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
+  <script src="{{asset('assets/js/main.js')}}"></script>
+
+</body>
+
+</html>

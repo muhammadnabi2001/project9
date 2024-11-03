@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeOrDislikeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
@@ -25,4 +27,8 @@ Route::get('/admin',[PostController::class,'admin'])->middleware('auth');
 Route::post('/createpost',[PostController::class,'create']);
 Route::post('updatepost{id}',[PostController::class,'update'])->name('updatepost');
 Route::get('/deletepost/{id}',[PostController::class,'delete']);
-Route::get('/batafsil/{id}',[PostController::class,'batafsil']);
+Route::get('/batafsil/{id}', [PostController::class, 'batafsil'])->name('batafsil');
+Route::get('/showpost/{id}', [PostController::class, 'show'])->name('post.show');
+
+Route::get('/comments/{id}',[CommentController::class,'comment'])->name('post.comments');
+Route::get('/like/{id}',[LikeOrDislikeController::class,'like'])->name('post.like');

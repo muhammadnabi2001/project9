@@ -32,12 +32,11 @@
               <p class="post-category">{{$post->title}}</p>
               
               <h2 class="title">
-                <a href="batafsil/{{$post->id}}">{{$post->description}}</a>
+                <a href="{{ route('batafsil', $post->id) }}">{{ $post->description }}</a>
               </h2>
               
               <div class="d-flex align-items-center">
                 <div class="post-meta">
-                  <p class="post-author">somthe</p>
                   <p class="post-date">
                     <time datetime="2022-01-01">{{$post->created_at}}</time>
                   </p>
@@ -57,14 +56,7 @@
       <div class="container">
         <div class="d-flex justify-content-center">
           <ul>
-            <li><a href="#"><i class="bi bi-chevron-left"></i></a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#" class="active">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li>...</li>
-            <li><a href="#">10</a></li>
-            <li><a href="#"><i class="bi bi-chevron-right"></i></a></li>
+            {{ $posts->links() }}
           </ul>
         </div>
       </div>
@@ -97,4 +89,5 @@
       </div>
     </div>
   </footer>
+  
 @endsection

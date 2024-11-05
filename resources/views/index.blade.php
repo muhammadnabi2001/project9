@@ -71,8 +71,9 @@
                 <h5 class="mb-0">{{ $savol->title }}</h5>
             </div>
             <div class="card-body">
-                <form action="" method="POST">
+                <form action="votes" method="POST">
                     @csrf
+                    <input type="hidden" name="savol_id" value="{{ $savol->id }}">
                     @foreach($savol->variants as $variant)
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="variant_id" value="{{ $variant->id }}" id="variant{{ $variant->id }}">

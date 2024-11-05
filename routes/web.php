@@ -39,3 +39,4 @@ Route::post('/createquestion',[QuestionConroller::class,'create']);
 Route::post('/updatequestion{id}',[QuestionConroller::class,'update'])->name('updatequestion');
 Route::get('deletequestion{id}',[QuestionConroller::class,'delete'])->name('deletequestion');
 Route::post('createvariant{id}',[QuestionConroller::class,'createvariant'])->name('createvariant');
+Route::post('votes',[QuestionConroller::class,'votes']);

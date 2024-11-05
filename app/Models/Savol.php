@@ -12,6 +12,10 @@ class Savol extends Model
     ];
     public function variants()
     {
-        return $this->hasMany(Variant::class, 'savol_id', 'id'); 
+        return $this->hasMany(Variant::class, 'savol_id', 'id');
+    }
+    public function javobs()
+    {
+        return $this->hasMany(Javob::class, 'savol_id', 'id');
     }
 }

@@ -103,11 +103,11 @@
                                 <td>{{$question->title}}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="/isactive/{{$question->id}}"
+                                        <a href="/is_active/{{$question->id}}"
                                             class="btn {{ $question->is_active ? 'btn-success' : 'btn-secondary' }}">
                                             Active
                                         </a>
-                                        <a href="inactive/{{$question->id}}"
+                                        <a href="in_active/{{$question->id}}"
                                             class="btn {{ !$question->is_active ? 'btn-danger' : 'btn-secondary' }}">
                                             Inactive
                                         </a>

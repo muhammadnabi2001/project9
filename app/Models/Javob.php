@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Javob extends Model
 {
-    protected $fillable=[
+    protected $fillable = [
         'user_ip',
         'savol_id',
         'variant_id'
     ];
     public function variant()
     {
-        return $this->belongsTo(Variant::class, 'variant_id', 'id'); 
+        return $this->belongsTo(Variant::class, 'variant_id', 'id');
     }
 }

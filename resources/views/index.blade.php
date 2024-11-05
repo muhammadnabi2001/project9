@@ -62,6 +62,37 @@
       </div>
 
     </section><!-- /Blog Pagination Section -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<main class="container mt-5">
+    @foreach($savols as $savol)
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">{{ $savol->title }}</h5>
+            </div>
+            <div class="card-body">
+                <form action="" method="POST">
+                    @csrf
+                    @foreach($savol->variants as $variant)
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="variant_id" value="{{ $variant->id }}" id="variant{{ $variant->id }}">
+                            <label class="form-check-label" for="variant{{ $variant->id }}">
+                                {{ $variant->title }}
+                            </label>
+                        </div>
+                    @endforeach
+                    <button type="submit" class="btn btn-primary mt-3">Ovoz berish</button>
+                </form>
+
+                @if(session('success') && session('savol_id') == $savol->id)
+                    <div class="alert alert-success mt-3">{{ session('success') }}</div>
+                @elseif(session('error') && session('savol_id') == $savol->id)
+                    <div class="alert alert-danger mt-3">{{ session('error') }}</div>
+                @endif
+            </div>
+        </div>
+    @endforeach
+</main>
 
   </main>
   <footer id="footer" class="footer dark-background">

@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\View;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -91,8 +94,22 @@ class PostController extends Controller
 
         return redirect()->back()->with('error', 'Category not found.');
     }
-    public function batafsil(int $id)
+    public function batafsil(Request $request, int $id)
     {
+        //dd($request->ip());
+        $userIp = $request->ip();
+        $existingView = View::where('post_id', $id)
+            ->where('user_ip', $userIp)
+            ->first();
+        if (!$existingView) {
+            $new=Post::findOrFail($id);
+            $new->increment('view');
+
+            $view=new View();
+            $view->post_id=$id;
+            $view->user_ip=$userIp;
+            $view->save();
+        }
         //dd($id);
         $post = Post::findOrFail($id);
         $categories = Category::all();
@@ -104,7 +121,6 @@ class PostController extends Controller
         //dd($id);
         $posts = Post::where('category_id', $id)->paginate(3);
         $categories = Category::all();
-        return view('index',['categories'=>$categories,'posts'=>$posts]);
+        return view('index', ['categories' => $categories, 'posts' => $posts]);
     }
-   
 }

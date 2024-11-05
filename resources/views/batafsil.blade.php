@@ -15,7 +15,9 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -27,7 +29,7 @@
 
   <link href="{{asset('assets/css/main.css')}}" rel="stylesheet">
 
- 
+
 </head>
 
 <body class="blog-details-page">
@@ -36,17 +38,17 @@
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
       <a href="index.html" class="logo d-flex align-items-center">
-        
+
         <h1 class="sitename">Selecao</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
-            @foreach($categories as $category)
-            <li><a href="{{ route('post.show', $category->id) }}">{{ $category->name }}</a></li>   
-            @endforeach
-            <li><a href="/login">Login</a></li>
-            <li><a href="/register">Register</a></li>
+          @foreach($categories as $category)
+          <li><a href="{{ route('post.show', $category->id) }}">{{ $category->name }}</a></li>
+          @endforeach
+          <li><a href="/login">Login</a></li>
+          <li><a href="/register">Register</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -59,12 +61,10 @@
     <div class="page-title dark-background">
       <div class="container position-relative">
         <h1>Blog Details</h1>
-        <p>Esse dolorum voluptatum ullam est sint nemo et est ipsa porro placeat quibusdam quia assumenda numquam molestias.</p>
+        <p>Esse dolorum voluptatum ullam est sint nemo et est ipsa porro placeat quibusdam quia assumenda numquam
+          molestias.</p>
         <nav class="breadcrumbs">
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li class="current">Blog Details</li>
-          </ol>
+
         </nav>
       </div>
     </div>
@@ -80,11 +80,11 @@
                   <img src="{{ asset('img_uploaded/' . $post->img) }}" alt="" class="img-fluid">
                 </div>
                 <h2 class="title">{{$post->title}}</h2>
-                
+
 
                 <div class="content">
                   <p>
-                   {{$post->description}}
+                    {{$post->description}}
                   </p>
 
                   <p>
@@ -92,21 +92,28 @@
                   </p>
                 </div><!-- End post content -->
                 <div class="meta-top">
-                    <ul>
-                      <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2020-01-01">{{$post->created_at}}</time></a></li>
-                      <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">{{$post->comments->count()}} comments</a></li>
-                      <li class="d-flex align-items-center">
-                        <a href="{{ route('post.like', $post->id) }}" class="">
-                            <i class="bi bi-hand-thumbs-up {{ $post->likeOrDislike && $post->likeOrDislike ? 'text-danger' : '' }}">
-                                {{ $post->likeCount ? $post->likeCount->count() : 0 }}
-                            </i>  
-                        </a>
+                  <ul>
+                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time
+                          datetime="2020-01-01">{{$post->created_at}}</time></a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
+                        href="blog-details.html">{{$post->comments->count()}} comments</a></li>
+                    <li class="d-flex align-items-center">
+                      <a href="{{ route('post.like', $post->id) }}" class="">
+                        <i
+                          class="bi bi-hand-thumbs-up{{ $post->likeOrDislike && $post->likeOrDislike ? '-fill' : '' }}">
+                          {{ $post->likeCount ? $post->likeCount->count() : 0 }}
+                        </i>
+                      </a>
                     </li>
-                    
+
                     </li>
-                    
-                    </ul>
-                  </div><!-- End meta top -->
+                    <li class="d-flex align-items-center">
+                      <i class="bi bi-eye"></i>
+                      <a href="#">{{ $post->view }} views</a>
+                    </li>
+
+                  </ul>
+                </div><!-- End meta top -->
 
               </article>
 
@@ -137,24 +144,25 @@
         <div class="col-lg-4 sidebar">
           <div class="widgets-container">
 
-              <h3 class="widget-title">Comments</h3>
-              <ul class="mt-3">
-                <ul>
-                  @foreach($post->comments as $comment)
-                      <li>
-                        <strong>{{ $comment->user->name }} <br></strong>
-                          <a href="#">{{ $comment->body }}</a>
-                      </li>
-                  @endforeach
-              </ul>
-              
+            <h3 class="widget-title">Comments</h3>
+            <ul class="mt-3">
+              <ul>
+                @foreach($post->comments as $comment)
+                <li>
+                  <strong>{{ $comment->user->name }} <br></strong>
+                  <a href="#">{{ $comment->body }}</a>
+                </li>
+                @endforeach
               </ul>
 
-            </div><!--/Categories Widget -->
+            </ul>
+
           </div>
+          <!--/Categories Widget -->
         </div>
-
       </div>
+
+    </div>
     </div>
 
   </main>
@@ -175,7 +183,7 @@
           <span>Copyright</span> <strong class="px-1 sitename">Selecao</strong> <span>All Rights Reserved</span>
         </div>
         <div class="credits">
-         
+
           Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
         </div>
       </div>
@@ -183,7 +191,8 @@
   </footer>
 
   <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Preloader -->
   <div id="preloader"></div>

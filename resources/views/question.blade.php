@@ -23,7 +23,7 @@
             @endif
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Categories</h1>
+                    <h1 class="m-0">Questions</h1>
                 </div>
             </div>
             <div class="row mb-2">
@@ -44,21 +44,15 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="/createcategory" method="POST" >
+                                    <form action="/createquestion" method="POST">
                                         @csrf
                                         <div class="mb-3">
-                                            <label class="form-label">Category name</label>
-                                            <input type="text" class="form-control" placeholder="input category name"
-                                                name="name">
+                                            <label class="form-label">Questions title</label>
+                                            <input type="text" class="form-control" placeholder="input question title"
+                                                name="title">
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label">Category tr</label>
-                                            <input type="number" class="form-control"
-                                                placeholder="input category number" name="tr">
-                                        </div>
-                                        <div class="mb-3">
-                                            <input type="hidden" class="form-control" placeholder="input post text"
-                                                name="is_active" value="1">
+                                            <input type="hidden" class="form-control" name="is_active" value="1">
                                         </div>
                                 </div>
                                 <div class="modal-footer">
@@ -95,66 +89,105 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>TR</th>
+                                <th>Title</th>
                                 <th>Is Active</th>
+                                <th>Variant</th>
                                 <th>Update</th>
                                 <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody id="userTableBody">
-                            @foreach($categories as $category)
+                            @foreach($questions as $question)
                             <tr>
-                                <td>{{$category->id}}</td>
-                                <td>{{$category->name}}</td>
-                                <td>{{$category->tr}}</td>
+                                <td>{{$question->id}}</td>
+                                <td>{{$question->title}}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="/isactive/{{$category->id}}"
-                                            class="btn {{ $category->is_active ? 'btn-success' : 'btn-secondary' }}">
+                                        <a href="/isactive/{{$question->id}}"
+                                            class="btn {{ $question->is_active ? 'btn-success' : 'btn-secondary' }}">
                                             Active
                                         </a>
-                                        <a href="inactive/{{$category->id}}"
-                                            class="btn {{ !$category->is_active ? 'btn-danger' : 'btn-secondary' }}">
+                                        <a href="inactive/{{$question->id}}"
+                                            class="btn {{ !$question->is_active ? 'btn-danger' : 'btn-secondary' }}">
                                             Inactive
                                         </a>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="row mb-2">
-                                        <div class="col-sm-6 ">
+                                        <div class="col-sm-6">
                                             <!-- Button trigger modal -->
                                             <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal{{$category->id}}">
-                                                Update
+                                                data-bs-target="#exampleModalvariant">
+                                            Variant
                                             </button>
 
                                             <!-- Modal -->
-                                            <div class="modal fade" id="exampleModal{{$category->id}}" tabindex="-1"
-                                                aria-labelledby="exampleModalLabel{{$category->id}}" aria-hidden="true">
+                                            <div class="modal fade" id="exampleModalvariant" tabindex="-1"
+                                                aria-labelledby="exampleModalLabelvariant" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabel{{$category->id}}">Modal
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabelvariant">
+                                                                Modal
                                                                 title</h1>
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form action="{{ route('updatecategory', $category->id) }}" method="POST"
-                                                                >
+                                                            <form action="{{ route('createvariant', $question->id) }}"
+                                                                method="POST">
                                                                 @csrf
                                                                 <div class="mb-3">
-                                                                    <label class="form-label">Category name</label>
-                                                                    <input type="text" class="form-control"
-                                                                        placeholder="input category name" name="name" value="{{$category->name}}">
+                                                                    <label class="form-label"></label>
+                                                                    <input type="text" class="form-control" name="title"
+                                                                        value="" placeholder="Variant title">
                                                                 </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary"
+                                                                name="ok">Create</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                
+                                <td>
+                                    <div class="row mb-2">
+                                        <div class="col-sm-6">
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal{{$question->id}}">
+                                                Update
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModal{{$question->id}}" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel{{$question->id}}" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5"
+                                                                id="exampleModalLabel{{$question->id}}">Modal
+                                                                title</h1>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="{{ route('updatequestion', $question->id) }}"
+                                                                method="POST">
+                                                                @csrf
                                                                 <div class="mb-3">
-                                                                    <label class="form-label">Category tr</label>
-                                                                    <input type="number" class="form-control"
-                                                                        placeholder="input category number" name="tr" value="{{$category->tr}}">
+                                                                    <label class="form-label">Questions title</label>
+                                                                    <input type="text" class="form-control" name="title"
+                                                                        value="{{$question->title}}">
                                                                 </div>
-                                                                
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"
@@ -170,7 +203,8 @@
                                     </div>
                                 </td>
 
-                                <td><a href="deletecategory/{{$category->id}}" class="btn btn-danger">Delete</a></td>
+                                <td><a href="{{route('deletequestion',$question->id)}}"
+                                        class="btn btn-danger">Delete</a></td>
                             </tr>
                             @endforeach
                         </tbody>

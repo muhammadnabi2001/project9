@@ -132,6 +132,12 @@
                                     Categories
                                 </p>
                             </a>
+                            <a href="/question" class="nav-link">
+                                <i class="nav-icon fas fa-bars"></i>
+                                <p>
+                                    Questions
+                                </p>
+                            </a>
                             <a href="/logout" class="nav-link">
                                 <i class="nav-icon fas fa-bars"></i>
                                 <p>

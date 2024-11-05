@@ -27,10 +27,11 @@ class Post extends Model
     public function likeCount()
     {
         return $this->hasMany(LikeOrDislike::class)
-            ->where('value', true); 
+            ->where('value', true);
     }
     public function likeOrDislike()
-{
-    return $this->hasOne(LikeOrDislike::class)->where('users_id', Auth::id());
-}
+    {
+        return $this->hasOne(LikeOrDislike::class)->where('users_id', Auth::id());
+    }
+    
 }

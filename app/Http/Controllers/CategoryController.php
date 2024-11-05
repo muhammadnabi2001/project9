@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Javob;
 use App\Models\Post;
+use App\Models\Savol;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,7 +16,9 @@ class CategoryController extends Controller
         $categories=Category::orderBy('tr','asc')->get();
         //dd($categories);
         $posts=Post::orderBy('id','desc')->paginate(3);
-        return view('index',['categories'=>$categories,'posts'=>$posts]);
+        $savols=Savol::all();
+        $variants=Javob::all();
+        return view('index',['categories'=>$categories,'posts'=>$posts,'savols'=>$savols,'variants'=>$variants]);
     }
     public function category()
     {

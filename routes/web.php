@@ -5,8 +5,9 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeOrDislikeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\QuestionConroller;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Types\Relations\Role;
 
 Route::get('/',[CategoryController::class,'index']);
 Route::get('/category',[CategoryController::class,'category'])->middleware('auth');
@@ -32,3 +33,9 @@ Route::get('/showpost/{id}', [PostController::class, 'show'])->name('post.show')
 
 Route::get('/comments/{id}',[CommentController::class,'comment'])->name('post.comments');
 Route::get('/like/{id}',[LikeOrDislikeController::class,'like'])->name('post.like');
+
+Route::get('/question',[QuestionConroller::class,'question']);
+Route::post('/createquestion',[QuestionConroller::class,'create']);
+Route::post('/updatequestion{id}',[QuestionConroller::class,'update'])->name('updatequestion');
+Route::get('deletequestion{id}',[QuestionConroller::class,'delete'])->name('deletequestion');
+Route::post('createvariant{id}',[QuestionConroller::class,'createvariant'])->name('createvariant');
